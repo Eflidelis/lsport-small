@@ -288,14 +288,20 @@ const TheApplication = ({ submitApplication }) => {
               </div>
 
               <div className="field">
-                <span className="label">Комментарий </span>
-                <AppInput
-                  value={form.notes}
-                  onChange={(v) => handleChange('notes', v)}
-                  className="input"
-                  placeholder="Краткое описание"
-                />
-              </div>
+  <span className="label">Комментарий </span>
+  <AppInput
+    value={form.notes}
+    onChange={(v) => handleChange('notes', v)}
+    className="input textarea"
+    placeholder="Краткое описание"
+    fieldType="textarea"
+    maxLength={2000}
+  />
+  <div style={{ fontSize: 12, color: '#888', textAlign: 'right' }}>
+    {form.notes.length} / 2000
+  </div>
+</div>
+
 
               <div className="policy">
                 <AppChecker

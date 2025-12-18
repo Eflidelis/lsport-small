@@ -6,6 +6,7 @@
   justify-content: center;
   align-items: center;
   background-color: map-get($colors, "light-gray");
+  padding-bottom: 40px;
 
   &.application--sent {
     align-items: flex-start;
@@ -14,80 +15,104 @@
   }
 
   .grid {
-    height: inherit;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 40px;
-
-    .left {
-  width: 100%;
-  max-width: none;          
-  display: flex;
-  flex-direction: column;
-  gap: 18px;                /* вертикальный интервал */
-
-  .title {
-    font-size: 36px;
-    font-weight: 700;
-    margin: 0 0 20px 0;
-    color: map-get($colors, "dark-blue");
-    max-width: 90%;
-    word-break: break-word;
+    align-items: start;
   }
 
-  .description {
-    font-size: 18px;
-    color: map-get($colors, "gray");
-    max-width: 90%;
-    word-break: break-word;
+  /* ЛЕВАЯ КОЛОНКА */
+  .left {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+
+    .title {
+      font-size: 36px;
+      font-weight: 700;
+      margin: 0 0 20px 0;
+      color: map-get($colors, "dark-blue");
+      max-width: 90%;
+      word-break: break-word;
+    }
+
+    .description {
+      font-size: 18px;
+      color: map-get($colors, "gray");
+      max-width: 90%;
+      word-break: break-word;
+    }
   }
-}
 
+  /* ПРАВАЯ КОЛОНКА */
+  .right {
+    width: 100%;
 
-    .right {
-      .form {
-        /* фикс — форма больше НЕ узкая и тянется на ширину колонки */
-        width: 100%;
-        max-width: 100%;
+    .form {
+      width: 100%;
+      max-width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding: 20px;
+      border-radius: 24px;
+      background-color: #ffffff;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      box-sizing: border-box;
 
+      /* ОДНО ПОЛЕ ФОРМЫ */
+      .field {
         display: flex;
         flex-direction: column;
-        gap: 20px;
-        padding: 20px;
-        border-radius: 24px;
-        background-color: white;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        gap: 8px;
+        width: 100%;
 
-        .field {
-          .label {
-            font-size: 14px;
-            font-weight: 500;
-            color: map-get($colors, "dark-gray");
-          }
-
-          .input {
-            margin-top: 10px;
-            padding: 10px;
-            border: 2px solid transparent;
-            border-radius: 5px;
-            font-size: 16px;
-            transition: border-color 0.3s;
-
-            &:focus { border-color: map-get($colors,"blue"); box-shadow:0 0 5px rgba(0,0,0,.2); }
-            &:hover { border-color: map-get($colors,"blue"); }
-          }
+        .label {
+          font-size: 14px;
+          font-weight: 500;
+          color: map-get($colors, "dark-gray");
+          line-height: 1.2;
         }
+      }
 
-        .policy {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          margin: 20px 0;
-        }
+      /* input — отдельно */
+      input {
+        width: 100%;
+        box-sizing: border-box;
+        font-size: 16px;
+      }
+
+      /* textarea — отдельно */
+      textarea {
+        width: 100%;
+        min-height: 90px;
+        padding: 10px;
+        font-size: 16px;
+        line-height: 1.4;
+        resize: none;
+        box-sizing: border-box;
+      }
+
+      .policy {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 20px 0;
+        font-size: 14px;
       }
     }
   }
 
+  /* СЧЁТЧИК СИМВОЛОВ */
+  .textarea-counter {
+    font-size: 12px;
+    color: #888;
+    text-align: right;
+    margin-top: -4px;
+  }
+
+  /* SUCCESS */
   .success-wrapper {
     width: 100%;
     display: flex;
@@ -101,7 +126,7 @@
     padding: 32px 40px;
     border-radius: 24px;
     background-color: #ffffff;
-    box-shadow: 0 8px 24px rgba(0,0,0,.08);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -117,24 +142,16 @@
     margin-bottom: 20px;
     user-select: none;
     pointer-events: none;
-    transition: opacity .35s ease;
   }
 
   .success-text {
     font-size: 22px;
     font-weight: 600;
-    color: map-get($colors,"dark-blue");
+    color: map-get($colors, "dark-blue");
   }
 }
 
-/* изображение в левом блоке */
-
-.application .left {
-  display: flex;
-  flex-direction: column;
-}
-
-/* контейнер под изображение */
+/* ИЗОБРАЖЕНИЕ */
 .application-image-wrapper {
   width: 100%;
   max-width: 500px;
@@ -146,169 +163,36 @@
   overflow: hidden;
 }
 
-/* картинка подстраивается под область */
 .application-image {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  border-radius: 14px;
 }
 
+/* АДАПТИВ */
 
-/* ПК и планшет <1024px — в блок уходит в колонку */
 @media (max-width: 1024px) {
   #application .grid {
     grid-template-columns: 1fr;
     gap: 30px;
-    text-align: center;
   }
 
-  #application .left {
-    max-width: 100%;
-    margin: 0 auto;
+  .application .left .title {
+    font-size: 30px;
+  }
+
+  .application .left .description {
+    font-size: 16px;
+    max-width: 95%;
   }
 }
 
-/* Мобильные <768px — увеличиваем ширину формы и текста */
 @media (max-width: 768px) {
-  //#application {
-    //padding: 5px 0;
-  //}
-
   #application .grid {
     gap: 24px;
   }
 
-  #application .left .title {
-    font-size: 28px;
-  }
-
-  #application .right .form {
-    width: 100%;
-    max-width: 100%;
-    padding: 16px;
-    box-shadow: 0 4px 14px rgba(0,0,0,.08);
-  }
-
-  #application .form .input {
-    font-size: 15px;
-  }
-
-  #application .form .policy {
-    font-size: 14px;
-    align-items: flex-start;
-  }
-}
-
-/* успешная отправка — мобильный */
-@media (max-width: 768px) {
-  .success-card {
-    padding: 24px;
-  }
-
-  .success-gif {
-    width: 120px;
-    height: 120px;
-  }
-
-  .success-text {
-    font-size: 18px;
-  }
-}
-
-#application.application { display: block !important; padding-bottom:40px; }
-#application.application .grid { align-items:start !important; }
-#application + h2 { display:none; }
-
-/* Выравнивание формы и заголовков на планшетах */
-@media (max-width: 1024px) {
-  #application,
-  #application .left,
-  #application .right,
-  #application .form {
-    text-align: left !important;
-  }
-
-  #application .left {
-    margin: 0; 
-    max-width: 100%;
-  }
-
-  #application .form {
-    margin-left: 0;
-  }
-}
-
-/* Мобильная версия */
-@media (max-width: 768px) {
-  #application .grid {
-    justify-items: flex-start; /* элементы внутри не по центру */
-  }
-
-  #application .left,
-  #application .form {
-    text-align: left !important;
-    width: 100%;
-  }
-
-  #application .form .field,
-  #application .form input,
-  #application .form textarea {
-    width: 100%;
-  }
-
-  #application .form {
-    align-items: flex-start; /* поля строго слева */
-  }
-}
-
-/* изображение в левом блоке */
-
-.application .left .application-image {
-  width: 100%;              /* растягивается на доступное пространство */
-  max-width: 520px;         
-  margin-top: 32px;
-  border-radius: 14px;      
-  display: block;
-}
-
-
-
-@media (max-width: 1024px) {
-  .application .left .application-image {
-    max-width: 480px;
-    margin: 24px 0 0;
-  }
-}
-
-
-@media (max-width: 768px) {
-  .application .left .application-image {
-    max-width: 100%;
-    margin: 20px 0 0;
-  }
-}
-
-/* адаптив для текстов */
-
-/* Планшеты <1024 */
-@media (max-width: 1024px) {
-  .application .left .title {
-    font-size: 30px;      /* было 36 */
-  }
-
-  .application .left .description {
-    font-size: 16px;      /* было 18 */
-    max-width: 95%;
-  }
-
-  .application .form .policy {
-    font-size: 15px;
-    line-height: 1.3;
-  }
-}
-
-/* Мобильные <768 */
-@media (max-width: 768px) {
   .application .left .title {
     font-size: 26px;
   }
@@ -317,17 +201,22 @@
     font-size: 15px;
   }
 
-  .application .form .policy {
-    font-size: 14px;
+  .application .right .form {
+    padding: 16px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
   }
 
-  .application .form .policy span {
-    display: block;       /* перенос строки, читается лучше */
-    margin-left: 4px;
+  .application-image-wrapper {
+    height: auto;
+    min-height: 180px;
+  }
+
+  .application-image {
+    height: auto;
+    max-height: 260px;
   }
 }
 
-/* Маленькие экраны <480 */
 @media (max-width: 480px) {
   .application .left .title {
     font-size: 22px;
@@ -338,55 +227,7 @@
     max-width: 100%;
   }
 
-  .application .form .policy {
-    font-size: 13px;
-  }
-}
-/* доработки адаптива */
-
-
-@media (max-width: 768px) {
-  .application .left {
-    width: 100%;
-    max-width: 100%;
-  }
-}
-
-
-@media (max-width: 360px) {
-  #application .form {
-    padding: 14px !important;
-  }
-}
-
-/* на десктопе фиксированная высота, чтобы картинка не увеличивала блок */
-.application-image-wrapper {
-  width: 100%;
-  max-width: 500px;
-  height: 300px;        
-  margin-top: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;     
-}
-
-/* картинка подстраивается под высоту */
-.application-image {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-
-@media (max-width: 768px) {
-  .application-image-wrapper {
-    height: auto !important;   
-    min-height: 180px;         
-  }
-
-  .application-image {
-    height: auto !important;   
-    max-height: 260px;         
+  .application .right .form {
+    padding: 14px;
   }
 }
