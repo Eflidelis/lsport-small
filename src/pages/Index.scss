@@ -1,0 +1,53 @@
+/* единый вид всех заголовков сайта */
+
+.container h1,
+.partners-title,
+.mobile-title,
+.process-title-main {
+  font-size: 34px;
+  font-weight: 700;
+  color: #475569;
+  text-align: left;
+
+  margin-top: 60px;
+  margin-bottom: 32px;
+}
+
+/* отступы между блоками */
+
+.possibilities,
+.offer-to-find-school,
+.regional-statistics,
+.offer-mobile-app,
+.application {
+  margin-top: 12px;
+}
+
+/* отступ перед блоком заявки больше */
+.application {
+  margin-top: 80px; 
+}
+
+/* снизу больше отступ */
+.process-title-main {
+  margin-top: 100px;
+  margin-bottom: 40px;
+}
+
+/* адаптив */
+
+@media (max-width: 768px) {
+  .container h1,
+  .partners-title,
+  .mobile-title,
+  .process-title-main {
+    font-size: 28px;
+    margin-top: 40px;
+    margin-bottom: 24px;
+  }
+
+  .application {
+    margin-top: 90px;
+  }
+}
+

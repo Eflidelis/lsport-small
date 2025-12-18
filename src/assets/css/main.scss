@@ -1,0 +1,43 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
+
+/* Контейнер сайта */
+
+.container {
+  width: min(1400px, 92%);   /* максимум 1400px но не меньше 92% ширины */
+  margin-inline: auto;
+  padding-inline: 16px;
+}
+
+/* сетка для всех блоков */
+.section {
+  width: min(1400px, 92%);
+  margin-inline: auto;
+  padding-inline: 16px;
+}
+
+/* ноутбуки и средние мониторы */
+@media (max-width: 1400px) {
+  .container { width: 95%; }
+}
+
+/* планшеты */
+@media (max-width: 992px) {
+  .container { width: 96%; }
+}
+
+/* мобильные */
+@media (max-width: 768px) {
+  .container { width: 94%; }
+}
+
+/* Глобальные стили */
+* {
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif; 
+}
+
+/* Стили для текста */
+p {
+  line-height: 22px;
+}

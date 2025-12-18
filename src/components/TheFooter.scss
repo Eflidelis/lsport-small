@@ -1,0 +1,31 @@
+.footer {
+  border-top: 1px solid rgba(0, 0, 0, 0.07);
+  background: transparent;           // фон страницы, а не сплошная серая полоса
+  padding: 14px 0;
+}
+
+
+.footer__inner {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  /* серая плашка только по ширине контейнера */
+  background: #f4f4f4;
+  border-radius: 12px 12px 0 0;
+  padding: 10px 16px;
+}
+
+/* мобильные */
+@media (max-width: 768px) {
+  .footer {
+    padding: 10px 0;
+  }
+
+  .footer .footer__inner {
+    justify-content: center;
+  }
+
+  /* чтоб кнопка не вылезала за края контейнера */
+
+}

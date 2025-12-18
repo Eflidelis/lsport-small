@@ -1,0 +1,177 @@
+@import "../assets/css/colors"; 
+
+.edge-card.edge-card--collage {
+  width: 100%;
+  padding: 0 !important;
+  margin: 60px 0 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+.edge-card__inner-collage {
+  width: 100%;
+  //padding: 40px 0;
+}
+
+
+.edge-card__inner-collage-content {
+  width: min(1400px, 92%);      /* было 100% — исправлено */
+  margin: 0 auto;               
+  height: 520px;
+  overflow: hidden;
+  border-radius: 24px;
+
+  background: radial-gradient(circle at 20% 0%, #fff 0, #f2f7ff 35%, #e3eaff 80%);
+  box-shadow: 0 18px 45px rgba(0,0,0,.12);
+  position: relative;
+}
+
+.edge-card__slot {
+  position: absolute;
+  width: 110px;
+  height: 110px;
+}
+
+.edge-card__image {
+  width: 100%;
+  filter: drop-shadow(0 0 14px rgba(255,255,255,.95));
+  opacity: 0;
+  transition: opacity .5s;
+}
+
+
+/* 📱 смартфон */
+.mobile-grid-emblems {
+  width: min(1400px, 92%);     /* чтобы мобильная сетка тоже совпадала с макетом */
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 18px;
+  padding: 24px;
+}
+
+.mobile-emblem{
+  width: 100%;
+  display: block;
+}
+
+
+/* уменьшение для планшета */
+@media (max-width:1024px) and (min-width:641px){
+  .edge-card__slot{ transform: scale(.75); }
+}
+
+/* авто-высота на маленьких */
+@media(max-width:640px){
+  .edge-card__inner-collage-content{ height:auto; }
+}
+
+
+
+
+@media (max-width: 420px) {
+
+  
+  .mobile-grid-emblems {
+    width: 96%;                  /* чуть шире, чтобы уменьшить поля */
+    padding: 16px;               /* меньше внутренний отступ */
+    gap: 14px;                   /* эмблемы ближе друг к другу */
+  }
+
+  .mobile-emblem {
+    width: 100%;
+    transform: scale(0.92);      
+  }
+
+  
+  .edge-card__inner-collage-content {
+    border-radius: 18px;
+    box-shadow: 0 12px 32px rgba(0,0,0,.10);
+  }
+}
+
+
+@media (max-width: 360px) {
+
+  .mobile-grid-emblems {
+    width: 98%;
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .mobile-emblem {
+    transform: scale(0.85);     
+  }
+
+  .edge-card__inner-collage-content {
+    border-radius: 14px;         
+    padding: 0 !important;       
+  }
+}
+
+
+@media (max-width: 330px) {
+  .mobile-grid-emblems {
+    grid-template-columns: 1fr;  /* одна колонка, чтобы текст не ломался */
+    gap: 10px;
+  }
+
+  .mobile-emblem {
+    transform: scale(0.78);
+  }
+}
+
+/* доп.адаптация для маленьких экранов */
+
+/* < 420 px */
+@media (max-width: 420px) {
+
+  .mobile-grid-emblems {
+    width: 95%;
+    padding: 14px;
+    gap: 14px;
+    grid-template-columns: repeat(2, 1fr); /* жестко 2 в ряд */
+  }
+
+  .mobile-emblem {
+    transform: scale(0.88);     /* меньше эмблемы */
+    transform-origin: center;
+  }
+}
+
+/* < 360 px */
+@media (max-width: 360px) {
+
+  .mobile-grid-emblems {
+    width: 94%;
+    padding: 12px;
+    gap: 12px;
+    grid-template-columns: repeat(2, 1fr); /* ОСТАЕТСЯ 2 В РЯДУ */
+  }
+
+  .mobile-emblem {
+    transform: scale(0.78);     /* ещё меньше */
+    transform-origin: center;
+  }
+
+  .edge-card__inner-collage-content {
+    border-radius: 14px;
+  }
+}
+
+/* ≤ 330 px — ультра маленькие */
+@media (max-width: 330px) {
+
+  .mobile-grid-emblems {
+    width: 92%;
+    padding: 10px;
+    gap: 10px;
+    grid-template-columns: repeat(2, 1fr); 
+  }
+
+  .mobile-emblem {
+    transform: scale(0.70);     
+    transform-origin: center;
+  }
+}

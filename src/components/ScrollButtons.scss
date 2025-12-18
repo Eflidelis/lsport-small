@@ -1,0 +1,38 @@
+.scroll-buttons {
+  position: fixed;
+  right: 24px;
+  bottom: 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 2000;
+}
+
+
+.scroll-buttons .btn {
+  width: 42px;
+  height: 42px;
+  padding: 0;                             
+  border-radius: 50%;
+  display: flex;                          
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(255,255,255,.85);
+  border: 1px solid rgba(0,0,0,.08);
+  backdrop-filter: blur(8px);
+
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0,0,0,.08);
+  transition: .25s ease;
+}
+
+.scroll-buttons .btn:hover {
+  transform: translateY(-3px);
+  background: rgba(255,255,255,.95);
+}
+
+/* скрыты на мобилках */
+@media (max-width: 768px) {
+  .scroll-buttons { display: none !important; }
+}

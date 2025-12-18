@@ -1,0 +1,221 @@
+.possibilities.container {
+  width: min(1400px, 92%) !important;
+  margin-inline: auto !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.possibilities {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+
+.possibilities {
+  margin-top:20px;
+
+  .poss-slider{
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  /* десктопы */
+  .glass-nav{
+    width:100%;
+    margin-bottom:16px;
+    border-radius:14px;
+
+    > ul{
+      width: 100%;
+      padding: 0 !important;
+      justify-content: center !important;
+      gap: 20px;
+      height:50px;
+      display:flex;
+      align-items:center;
+    }
+
+    > ul li a{
+      font-size:17px;  /* крупнее чем было */
+      font-weight:600;
+      padding:6px 2px;
+      white-space:nowrap;
+
+      &::after{
+        bottom:-4px;
+        height:2px;
+      }
+    }
+  }
+
+
+  @media(max-width:992px){
+
+    .glass-nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:10px 14px;
+      position:relative;
+      height:52px;
+      overflow:visible;
+    }
+
+    /* скрываем стандартный список */
+    .glass-nav > ul{
+      display:none !important;
+    }
+
+    /* текущий активный пункт слева */
+    .poss-current-tab{
+      font-size:16px;
+      font-weight:600;
+      color:#0e2542;
+      white-space:nowrap;
+    }
+
+    /* справа две кнопки */
+    .poss-controls{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      font-size:14px;
+      font-weight:600;
+      color:#d22323;
+    }
+
+    .poss-burger{
+      padding:6px 10px;
+      border-radius:8px;
+      background:rgba(255,255,255,.55);
+      border:1px solid rgba(0,0,0,.2);
+      font-size:14px;
+      cursor:pointer;
+    }
+
+    .poss-dropdown{
+      position:absolute;
+      top:58px;
+      right:14px;
+      background:white;
+      box-shadow:0 8px 22px rgba(0,0,0,.15);
+      border-radius:10px;
+      overflow:hidden;
+      display:none;
+      z-index:4;
+
+      ul{
+        list-style:none;
+        display:flex;
+        flex-direction:column;
+      }
+
+      li a{
+        padding:10px 16px;
+        font-weight:500;
+        white-space:nowrap;
+        display:block;
+        border-bottom:1px solid #eee;
+
+        &.active{
+          background:#edf3ff;
+          color:#1d39ff;
+        }
+      }
+    }
+
+    .poss-dropdown.open{
+      display:block;
+    }
+  }
+}
+
+
+
+.possibilities .glass-nav > ul {
+  width:100%;
+  justify-content:center !important;
+  gap:20px; /* обновлено под новую ширину */
+}
+
+/* экран слегка меньше */
+@media(max-width:1400px){
+  .possibilities .glass-nav > ul { gap:18px; }
+}
+
+/* ноутбуки */
+@media(max-width:1280px){
+  .possibilities .glass-nav > ul { gap:16px; }
+  .possibilities .glass-nav > ul li a { font-size:15.5px; } /* 🔥 не даст переносу */
+}
+
+/* 1100 */
+@media(max-width:1100px){
+  .possibilities .glass-nav > ul { gap:14px; }
+  .possibilities .glass-nav > ul li a { font-size:14.5px; }
+}
+
+/* 1024, все еще десктоп */
+@media(max-width:1024px){
+  .possibilities .glass-nav > ul {
+    gap:10px;
+  }
+  .possibilities .glass-nav > ul li a { font-size:14px; }
+}
+
+
+@media (max-width: 420px) {
+
+  
+  .possibilities .glass-nav.mobile {
+    padding: 10px 12px;
+    gap: 10px;
+  }
+
+  /* выбранный пункт получает max-width и перенос */
+  .possibilities .poss-current {
+    max-width: 68vw;
+    white-space: normal !important;   /* разрешен перенос */
+    line-height: 1.2;
+    font-size: 15px;
+  }
+
+  /* раскрывающееся меню шире и не обрезает текст */
+  .possibilities .poss-dropdown {
+    left: 0;
+    right: 0;
+    width: 100%;
+    border-radius: 12px;
+  }
+
+  .possibilities .poss-dropdown li a {
+    font-size: 15px;
+    white-space: normal !important;
+    line-height: 1.25;
+  }
+}
+
+
+@media (max-width: 360px) {
+
+  .possibilities .glass-nav.mobile {
+    padding: 8px 10px;
+    height: auto;        /* позволяет блоку подстроиться */
+  }
+
+  .possibilities .poss-current {
+    max-width: 72vw;
+    font-size: 14.5px;
+    line-height: 1.25;
+  }
+
+  .possibilities .poss-burger {
+    transform: scale(0.9);
+    padding: 4px 6px;
+  }
+
+  .possibilities .poss-dropdown {
+    top: 48px;
+  }
+}

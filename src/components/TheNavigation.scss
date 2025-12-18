@@ -1,0 +1,396 @@
+@use 'sass:color';
+@import "../assets/css/colors";
+
+$bp-lg: 1200px;
+$bp-md: 992px;
+$bp-sm: 768px;
+
+
+.navigation {
+  position: sticky;
+  top: 0;
+  z-index: 4000;
+  height: 90px;
+  padding-top: 6px;
+  background: rgba(255,255,255,.55);
+  backdrop-filter: blur(8px);
+  margin-bottom: 28px;
+   /* Фикс для залипания на мобильных, чтобы хедер не дергался */
+  transform: translateZ(0);
+  backface-visibility: hidden;
+
+  .nav-container {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 75px 1fr auto;
+    align-items: center;
+    column-gap: 8px;
+
+    background: rgba(173,208,255,.15);
+    border-radius: 14px;
+    padding: 0 22px;
+    width: min(1400px, 92%);   /* те же правила что .container */
+    margin-inline: auto;
+  }
+
+  .nav-logo .logo {
+    height: 80px;
+    width: auto;
+    transition: .25s;
+    object-fit: contain;
+
+    &:hover { transform: scale(1.06); }
+  }
+
+  .desktop-only { display: block; }
+  .mobile-only  { display: none; }
+
+  .nav-actions {
+    display: flex; align-items: center; gap: 10px;
+    > * {
+      display: inline-flex !important;
+      width: auto !important;
+    }
+  }
+}
+
+/* плавающая линия */
+.header-nav {
+  width: 100%;
+  margin-top: 10px;
+  padding: 0 12px;
+  background: transparent;
+  border-radius: 14px;
+
+  > ul {
+    display: flex; justify-content: center; align-items: center;
+    list-style: none; gap: 22px;
+    height: 48px; padding: 0; position: relative;
+
+    --ux: 0px;
+    --uw: 0px;
+  }
+
+  > ul::before {
+    content:""; position:absolute;
+    left:var(--ux); bottom:0;
+    width:var(--uw); height:3px;
+    background:#2d66ff; opacity:0;
+    border-radius:2px;
+    transition: opacity .25s ease, left .35s ease, width .35s ease;
+  }
+
+  > ul.nav-underline-ready::before { opacity: 1; }
+
+  > ul li a,
+  > ul li .as-link {
+    font-size: 16px; font-weight:600;
+    padding:6px 2px; color:#1e3350;
+    transition: .25s; cursor:pointer;
+    text-decoration:none;
+
+    &:hover { color:#0c1a33; font-weight:700; }
+  }
+}
+
+
+.glass-nav {
+  --ball:#2b6de8;
+  --glass-bg:rgba(173,208,255,.35);
+  --glass-br:14px;
+
+  justify-self:center;
+  margin-top:10px; padding:0 14px;
+  position:relative; width:max-content;
+
+  background:var(--glass-bg);
+  border:1px solid rgba(255,255,255,.28);
+  border-radius:var(--glass-br);
+  box-shadow:0 6px 26px rgba(0,0,0,.10), 0 3px 12px rgba(0,0,0,.05);
+
+  > ul {
+    --translate-x:0px; --translate-y:0px; --rotate-x:0deg;
+
+    list-style:none;
+    display:flex; align-items:center;
+    height:34px; padding:0 8px; gap:2px;
+    position:relative; isolation:isolate;
+
+    &::after { display:none!important; }
+    &.show-indicator::after { display:none!important; }
+
+    li,li a,li .as-link {
+      height:100%; display:flex; align-items:center;
+    }
+
+    li a, li .as-link {
+      padding:0 14px;
+      font-weight:700; font-size:.92rem;
+      color:#19324e; text-decoration:none;
+      transition:.22s;
+
+      &:hover,&.active { color:#0d2239; transform:translateY(-2px); }
+    }
+  }
+}
+
+
+.burger {
+  --w:24px; --h:2px;
+
+  display:inline-flex; align-items:center; justify-content:center;
+  width:44px; height:44px;
+  border-radius:10px;
+  border:1px solid rgba(0,0,0,.08);
+  background:rgba(173,208,255,.35);
+  cursor:pointer; position:relative;
+  transition:.25s;
+
+  span {
+    position:absolute;
+    width:var(--w); height:var(--h);
+    background:#0d2239; border-radius:2px;
+    transition:.25s;
+  }
+
+  span:nth-child(1){top:14px;}
+  span:nth-child(2){top:21px;}
+  span:nth-child(3){top:28px;}
+
+  &.is-open {
+    span:nth-child(1){top:21px; transform:rotate(45deg);}
+    span:nth-child(2){opacity:0;}
+    span:nth-child(3){top:21px; transform:rotate(-45deg);}
+  }
+}
+
+
+.mobile-menu { display:none; }
+.mobile-menu.open { display:block; }
+
+/* выпадающее меню под бургером */
+.mobile-menu {
+  /* было: position: absolute; top: 65px; */
+  position: fixed;     /* меню “прилипает” к экрану, а не к странице */
+  top: 90px;           /* высота хедера на десктопе/планшете */
+  left: 0;
+  right: 0;
+  padding: 12px 0;
+  z-index: 3500;       /* ниже .navigation, но выше контента */
+
+  .mobile-glass {
+    width:min(940px, calc(100% - 32px));
+    margin:auto;
+    background: rgba(173, 208, 255, .90) !important;
+    backdrop-filter: blur(14px);
+    border-radius:16px;
+    padding:12px 10px;
+
+    ul { list-style:none; display:grid; gap:6px; }
+
+    .as-button {
+      display:block; width:100%;
+      padding:12px 14px;
+      border-radius:10px;
+      font-weight:700; text-align:left;
+      color:#0d2239; background:rgba(255,255,255,.58);
+      border:1px solid rgba(0,0,0,.06);
+      transition:.2s;
+
+      &:hover {
+        background:rgba(255,255,255,.7);
+        transform:translateY(-1px);
+      }
+    }
+
+    .mobile-actions {
+      margin-top:10px;
+      display:flex;
+      gap:10px;
+      justify-content:flex-end;
+      flex-wrap:wrap;
+    }
+  }
+}
+
+
+
+.burger-wrap {
+  display:flex; align-items:center;
+  gap:8px; cursor:pointer; white-space:nowrap;
+}
+
+.burger-label {
+  display:inline-flex; align-items:center;
+  height:44px;
+  font-size:16px; font-weight:600;
+  color:#0d2239; opacity:.95;
+  user-select:none;
+}
+
+
+@media (min-width:992px){
+  .burger-wrap { display:none!important; }
+}
+
+
+
+@media(max-width:$bp-lg){
+  .glass-nav > ul::after {opacity:0!important;}
+}
+
+@media(max-width:$bp-md){
+  .desktop-only {display:none!important;}
+  .mobile-only  {display:inline-grid!important;}
+
+  .nav-logo .logo {height:62px;}
+  .nav-container {grid-template-columns:56px 1fr auto;}
+}
+
+@media(max-width:$bp-sm){
+  .nav-logo .logo{height:50px;}
+  .nav-container{grid-template-columns:48px 1fr auto;}
+}
+
+
+.navigation.navigation--staff .mobile-menu .mobile-glass ul li a,
+.navigation.navigation--staff .mobile-menu .mobile-glass ul li button{
+  display:block; padding:12px 16px;
+  font-size:16px; font-weight:600;
+  color:#0d2239;
+  background:rgba(255,255,255,.55);
+  border-radius:10px;
+  border:1px solid rgba(0,0,0,.06);
+  margin-bottom:6px;
+}
+
+.navigation.navigation--staff .mobile-menu .mobile-glass ul li a:hover,
+.navigation.navigation--staff .mobile-menu .mobile-glass ul li button:hover{
+  background:rgba(255,255,255,.78);
+  transform:translateY(-2px);
+}
+
+.navigation.navigation--staff .mobile-menu .mobile-actions{
+  margin-top:14px; padding-top:8px;
+  border-top:1px solid rgba(255,255,255,.6);
+  display:flex; gap:10px; justify-content:flex-end;
+}
+
+.navigation--staff .mobile-menu {z-index:3000!important;}
+
+.navigation--staff .mobile-menu .mobile-glass{
+  background: rgba(173, 208, 255, 1) !important; /* 100% плотность */
+  backdrop-filter:blur(12px);
+}
+
+/* меню в одну строку, скрыто на десктопе */
+.burger-wrap.mobile-only {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+}
+
+/* на больших экранах бургера нет */
+@media (min-width: 992px) {
+    .burger-wrap.mobile-only {
+        display: none !important;
+    }
+}
+
+/* фикс выравнивания "Меню" рядом с бургером */
+.burger-wrap.mobile-only {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 6px !important;
+    white-space: nowrap !important;
+    height: 44px;                     
+}
+
+/* бургер по центру строки */
+.burger-wrap.mobile-only .burger {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* надпись по вертикали ровно */
+.burger-wrap.mobile-only .burger-label {
+    line-height: 44px !important;
+    height: 44px !important;
+    display: flex;
+    align-items: center;
+}
+
+/* скрыть на десктопе */
+@media (min-width: 992px) {
+    .burger-wrap.mobile-only { display: none !important; }
+}
+.burger-wrap.mobile-only .burger-label {
+    color: #333845 !important;   
+    font-weight: 600;
+}
+
+
+@media (max-width: 360px) {
+
+  
+  .navigation {
+    height: 74px;
+    padding-top: 4px;
+  }
+    
+  .mobile-menu {
+    top: 74px;  /* такая же высота, как у .navigation в этом случае */
+  }
+
+
+  
+  .navigation .nav-container {
+    padding: 0 12px;
+    grid-template-columns: 42px 1fr auto; 
+    column-gap: 4px;
+  }
+
+  /* уменьшенный логотип */
+  .nav-logo .logo {
+    height: 42px !important;
+  }
+
+  /* бургер покомпактнее */
+  .burger {
+    width: 38px;
+    height: 38px;
+  }
+
+  .burger span {
+    width: 20px; height: 2px;
+  }
+  .burger span:nth-child(1){ top: 12px; }
+  .burger span:nth-child(2){ top: 18px; }
+  .burger span:nth-child(3){ top: 24px; }
+
+  /* слово “Меню” поменьше, чтобы не вываливалось */
+  .burger-label {
+    font-size: 14px !important;
+    white-space: nowrap;
+  }
+
+  
+  .header-nav > ul li a,
+  .header-nav > ul li .as-link {
+    font-size: 14px !important;
+    padding: 4px 2px;
+  }
+
+  
+  .mobile-menu .mobile-glass {
+    padding: 10px 8px;
+  }
+
+  .mobile-menu .mobile-glass .as-button {
+    font-size: 14px;
+    padding: 10px 12px;
+  }
+}

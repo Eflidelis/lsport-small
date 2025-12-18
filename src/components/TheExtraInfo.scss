@@ -1,0 +1,105 @@
+.extra-info {
+  margin-top: 120px;
+  margin-bottom: 120px;
+  text-align: center;
+
+  .extra-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #475569;
+  }
+
+  .extra-subtitle {
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 40px;
+    color: #475569;
+    opacity: 0.8;
+  }
+
+  .extra-qr-row {
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+    flex-wrap: wrap;
+  }
+
+  .qr-card {
+    text-align: center;
+
+    p {
+      margin-top: 12px;
+      font-size: 17px;
+      font-weight: 600;
+
+      a {
+        color: #2b6de8;
+        text-decoration: none;
+        font-weight: 700;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  /* куары остаются почти как в исходнике */
+  .qr-image {
+    width: 200px;
+    height: 200px;
+    image-rendering: pixelated;
+  }
+
+  /* адаптив */
+
+  /* планшеты <992 */
+  @media (max-width: 992px) {
+    .extra-title { font-size: 30px; }
+    .extra-subtitle { font-size: 18px; }
+
+    .qr-card p {
+      font-size: 16px;
+    }
+  }
+
+  /* мобильные <768 */
+  @media (max-width: 768px) {
+    margin-top: 100px;
+    margin-bottom: 100px;
+
+    .extra-title { font-size: 28px; }
+    .extra-subtitle { font-size: 17px; }
+
+    .extra-qr-row {
+      flex-direction: column;
+      gap: 44px; 
+    }
+
+    .qr-card p {
+      font-size: 15.5px;
+    }
+  }
+
+  /* Маленькие телефоны <480 */
+  @media (max-width: 480px) {
+    .extra-title { font-size: 26px; }
+    .extra-subtitle { font-size: 16px; }
+
+    .qr-card p {
+      font-size: 15px;
+    }
+  }
+
+  /* Самые маленькие экраны <360 — минимальное уменьшение куара */
+  @media (max-width: 360px) {
+    .qr-image {
+      width: 180px;
+      height: 180px;
+    }
+
+    .qr-card p {
+      font-size: 14px;
+    }
+  }
+}
