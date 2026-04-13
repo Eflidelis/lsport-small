@@ -4,13 +4,24 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import DefaultLayout from './layouts/DefaultLayout';
 import Index from './pages/Index';
 import StatisticsPage from './pages/StatisticsPage';
+
 import ThePossibilities from './components/ThePossibilities';
 import TheNavigation from './components/TheNavigation';
 import TheRegionalStatistics from './components/TheRegionalStatistics';
 
 import ScrollToTop from "./components/ScrollToTop";
 
-// обработчик ошибок (можно оставить, если axios используется на публичных страницах)
+// страницы футера
+import AboutCompany from "./pages/AboutCompany";
+import Clients from "./pages/Clients";
+import ItAccreditation from "./pages/ItAccreditation";
+import Offer from "./pages/Offer";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import CookiePolicy from "./pages/CookiePolicy";
+import KnowledgeBase from "./pages/KnowledgeBase";
+import ApiDocs from "./pages/ApiDocs";
+
+// обработчик ошибок
 import "./api/axiosErrorHandler";
 
 // страницы ошибок
@@ -35,7 +46,6 @@ function App() {
 
   return (
     <DefaultLayout>
-
       <TheNavigation />
       <ScrollToTop />
 
@@ -44,9 +54,21 @@ function App() {
         <Route path="/" element={<Index />} />
 
         {/* Публичные страницы */}
-        <Route path="statistics" element={<StatisticsPage />} />
-        <Route path="possibilities" element={<ThePossibilities />} />
-        <Route path="regional-statistics" element={<TheRegionalStatistics />} />
+        <Route path="/statistics" element={<StatisticsPage />} />
+        <Route path="/possibilities" element={<ThePossibilities />} />
+        <Route path="/regional-statistics" element={<TheRegionalStatistics />} />
+
+        {/* Страницы из футера */}
+        <Route path="/about-company" element={<AboutCompany />} />
+        <Route path="/clients" element={<Clients />} />
+        <Route path="/it-accreditation" element={<ItAccreditation />} />
+
+        <Route path="/offer" element={<Offer />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/cookie-policy" element={<CookiePolicy />} />
+
+        <Route path="/knowledge-base" element={<KnowledgeBase />} />
+        <Route path="/api-docs" element={<ApiDocs />} />
 
         {/* страницы ошибок */}
         <Route path="/error/500" element={<Error500 />} />
@@ -55,7 +77,6 @@ function App() {
         {/* 404 */}
         <Route path="*" element={<Error404 />} />
       </Routes>
-
     </DefaultLayout>
   );
 }

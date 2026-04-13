@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import TheHeader from '../components/TheHeader';
 import InfoRow from '../components/InfoRow';
@@ -16,8 +16,6 @@ import ScrollButtons from '../components/ScrollButtons';
 import './Index.scss';
 
 const Index = () => {
-  const [submissionMessage, setSubmissionMessage] = useState('');
-
   const submitApplication = async (applicationData) => {
     try {
       const payload = {
@@ -29,26 +27,22 @@ const Index = () => {
         comment: applicationData.notes,
       };
 
-      const response = await fetch(
-        'https://tg-form.lsport.workers.dev',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(payload),
-        }
-      );
+      const response = await fetch('https://tg-form.lsport.workers.dev', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
 
       if (!response.ok) {
         throw new Error('Ошибка отправки заявки');
       }
 
       console.log('Заявка успешно отправлена');
-      setSubmissionMessage('Заявка отправлена!');
     } catch (error) {
       console.error('Ошибка при отправке заявки:', error);
-      setSubmissionMessage('Ошибка при отправке заявки. Попробуйте позже.');
+      throw error; // важно: пусть TheApplication сам решает, что показывать
     }
   };
 
@@ -57,12 +51,10 @@ const Index = () => {
       <TheHeader />
       <InfoRow />
 
-      {/* обернутый заголовок так же как остальные блоки */}
       <div className="container">
         <h1 className="partners-title">Наши партнёры</h1>
       </div>
 
-      {/* Бывший блок записи в спортшколу, теперь — партнёры */}
       <TheOfferToFindSchool />
 
       <div id="possibilities" className="container possibilities">
@@ -82,7 +74,6 @@ const Index = () => {
 
       <div id="application" className="container application">
         <TheApplication submitApplication={submitApplication} />
-        {submissionMessage && <h2>{submissionMessage}</h2>}
       </div>
 
       <h1 className="process-title-main container">Что будет дальше?</h1>
@@ -93,9 +84,7 @@ const Index = () => {
         <TheExtraInfo />
       </div>
 
-      {/* кнопки вверх/вниз */}
       <ScrollButtons />
-
       <TheFooter />
     </div>
   );

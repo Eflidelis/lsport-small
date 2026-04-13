@@ -1,31 +1,171 @@
+@import "../assets/css/colors";
+
+/* Сам footer больше НЕ красим в синий и не растягиваем */
 .footer {
-  border-top: 1px solid rgba(0, 0, 0, 0.07);
-  background: transparent;           // фон страницы, а не сплошная серая полоса
-  padding: 14px 0;
+  width: 100%;
 }
 
+/* Синий фон теперь внутри контейнера — ровно по ширине сайта */
+.footer__content {
+  background: map-get($colors, "blue");
+  color: #fff;
 
-.footer__inner {
+  padding: 28px 16px 34px; /* внутренние отступы как у блоков */
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+
+  /* чтобы нигде не вылезало */
+  box-sizing: border-box;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Верх */
+.footer__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer__brand {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-
-  /* серая плашка только по ширине контейнера */
-  background: #f4f4f4;
-  border-radius: 12px 12px 0 0;
-  padding: 10px 16px;
+  gap: 12px;
 }
 
-/* мобильные */
+.footer__logo {
+  width: 46px;
+  height: 46px;
+  padding: 6px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.15);
+  box-sizing: border-box;
+}
+
+.footer__brandName {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+/* Соцсети */
+.footer__socials {
+  display: flex;
+  gap: 12px;
+}
+
+.footer__socialBtn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+  font-weight: 700;
+  text-transform: uppercase;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+/* Линия */
+.footer__divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.6);
+  margin: 12px 0;
+}
+
+/* Низ */
+.footer__bottom {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) repeat(3, minmax(0, 1fr));
+  gap: 48px;
+}
+
+/* Белый блок */
+.footer__card {
+  background: #fff;
+  color: #1b1f2a;
+  padding: 18px;
+  border-radius: 14px;
+  box-sizing: border-box;
+}
+
+.footer__cardText {
+  margin-bottom: 14px;
+  font-size: 14px;
+}
+
+.footer__copyright {
+  font-size: 13px;
+  opacity: 0.65;
+}
+
+/* Колонки */
+.footer__col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer__title {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.footer__link {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+}
+
+.footer__link:hover {
+  text-decoration: underline;
+}
+
+/* Адаптив */
+@media (max-width: 1024px) {
+  .footer__bottom {
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+
+  .footer__card {
+    grid-column: 1 / -1;
+  }
+}
+
 @media (max-width: 768px) {
-  .footer {
-    padding: 10px 0;
+  .footer__content {
+    padding: 22px 14px 24px;
   }
 
-  .footer .footer__inner {
-    justify-content: center;
+  .footer__top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
   }
 
-  /* чтоб кнопка не вылезала за края контейнера */
+  .footer__bottom {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+}
 
+/* Самые узкие экраны */
+@media (max-width: 360px) {
+  .footer__brandName {
+    font-size: 20px;
+  }
+
+  .footer__socialBtn {
+    width: 40px;
+    height: 40px;
+  }
+
+  .footer__content {
+    padding: 18px 12px 22px;
+  }
 }

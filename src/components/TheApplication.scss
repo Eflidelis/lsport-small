@@ -231,3 +231,37 @@
     padding: 14px;
   }
 }
+/* Мобильная форма — фиксы */
+@media (max-width: 768px) {
+  .application .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .application .right {
+    width: 100%;
+  }
+
+  .application .right .form {
+    width: 100%;
+    padding: 16px;
+  }
+
+  .application .right .form .field {
+    width: 100%;
+  }
+
+  .application .right .form button.learn-more-btn {
+    align-self: flex-start;
+  }
+}
+
+/* Очень маленькие экраны */
+@media (max-width: 360px) {
+  .application .right .form {
+    padding: 12px;
+  }
+
+  .application .left .title {
+    font-size: 20px;
+  }
+}
